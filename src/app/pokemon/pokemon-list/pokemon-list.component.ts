@@ -1,22 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { PokemonService } from '../pokemon.service';
 import { PokemonBorderCardDirective } from '../pokemon-border-card.directive';
 import { PokemonTypeColorPipe } from '../pokemon-type-color.pipe';
 import { Pokemon } from '../pokemon';
-import { POKEMONS } from '../pokemon-list';
 
 @Component({
   selector: 'app-pokemon-list',
   standalone: true,
-  imports: [CommonModule, PokemonBorderCardDirective, PokemonTypeColorPipe],
+  imports: [CommonModule, RouterLink, PokemonBorderCardDirective, PokemonTypeColorPipe],
   templateUrl: './pokemon-list.component.html',
 })
-export class PokemonListComponent {
-  pokemons: Array<Pokemon> = POKEMONS;
-  selectedPokemon: Pokemon | undefined;
 
-  constructor(private router: Router) { }
+export class PokemonListComponent implements OnInit {
+  pokemons: Array<Pokemon>;
+
+  constructor(
+    private router: Router,
+    private pokemonService: PokemonService
+  ) { }
+
+  ngOnInit(): void {
+    this.pokemonService
+      .getPokemons()
+      .subscribe((pokemons) => this.pokemons = pokemons);
+  }
 
   goToPokemonDetails(pokemonId: string): void {
     this.router.navigate(['/pokemons', pokemonId]);

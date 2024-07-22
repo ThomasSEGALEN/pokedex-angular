@@ -4,6 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'pokemonTypeColor',
   standalone: true
 })
+
 export class PokemonTypeColorPipe implements PipeTransform {
   transform(type: string): string {
     let color: string;
@@ -36,7 +37,7 @@ export class PokemonTypeColorPipe implements PipeTransform {
       case 'Psy':
         color = 'deep-purple darken-2';
         break;
-      case 'Électrik':
+      case 'Electrik':
         color = 'lime accent-1';
         break;
       case 'Combat':

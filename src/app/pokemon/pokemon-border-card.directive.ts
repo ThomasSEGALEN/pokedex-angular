@@ -4,6 +4,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
   selector: '[pokemonBorderCard]',
   standalone: true
 })
+
 export class PokemonBorderCardDirective {
   initialColor: string = '#f5f5f5';
   defaultColor: string = '#009688';
